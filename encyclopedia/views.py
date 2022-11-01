@@ -15,3 +15,14 @@ def index(request):
         "entries": util.list_entries()
     })
 
+def entry(request, title):
+    entry_content = markdown_converter(title)
+    if entry_content == None:
+        return render(request, "encyclopedia/error.html",{
+            "message": "This entry not exist"
+        })
+    else:
+        return render(request, "encyclopedia/entry.html", {
+            "title": title,
+            "content": entry_content
+        })
