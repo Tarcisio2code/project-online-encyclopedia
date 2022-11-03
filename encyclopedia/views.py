@@ -16,13 +16,32 @@ def index(request):
     })
 
 def entry(request, title):
-    entry_content = markdown_converter(title)
-    if entry_content == None:
+    entryContent = markdown_converter(title)
+    if entryContent == None:
         return render(request, "encyclopedia/error.html",{
             "message": "This entry not exist"
         })
     else:
         return render(request, "encyclopedia/entry.html", {
             "title": title,
-            "content": entry_content
+            "content": entryContent
         })
+
+def search(request):
+    if request.method == "POST":
+        searchText = request.POST['q']
+        entryContent = markdown_converter(searchText)
+        if entryContent is not None:
+            return render(request, "encyclopedia/entry.html",{
+                "title": searchText,
+                "content": entryContent
+            })
+        else:
+            entryList = util.list_entries()
+            similarEntries = []
+            for entry in entryList:
+                if searchText.lower() in entry.lower():
+                    similarEntries.append(entry)
+            return render(request, "encyclopedia/search.html", {
+                "similarEntries": similarEntries
+            })
