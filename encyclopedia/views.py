@@ -62,5 +62,5 @@ def new_page(request):
             })
         else:
             return render(request, "encyclopedia/error.html", {
-                "message":"Entry page already existis"
+                "message":"Entry page already exists"
             })
