@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from markdown2 import Markdown
 from . import util
+import random
 
 def markdown_converter(title):
     source = util.get_entry(title)
@@ -37,9 +38,9 @@ def search(request):
                 "content": entryContent
             })
         else:
-            entryList = util.list_entries()
+            entiesList = util.list_entries()
             similarEntries = []
-            for entry in entryList:
+            for entry in entiesList:
                 if searchText.lower() in entry.lower():
                     similarEntries.append(entry)
             return render(request, "encyclopedia/search.html", {
@@ -81,3 +82,12 @@ def update_page(request, title):
             "title": title,
             "content": htmlContent
         })
+
+def random_page(request):
+    entriesList = util.list_entries()
+    randomEntry = random.choice(entriesList)
+    htmlContent = markdown_converter(randomEntry)
+    return render(request, "encyclopedia/entry.html",{
+        "title": randomEntry,
+        "content": htmlContent
+    })
