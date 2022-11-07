@@ -4,6 +4,12 @@
     {{ title }}
 {% endblock %}
 
+{% block nav %}
+    <div>
+        <a href="{% url 'editpage' title %}">Edit Page</a>
+    </div>
+{% endblock %}
+
 {% block body %}
     {{ content | safe }}
 {% endblock %}

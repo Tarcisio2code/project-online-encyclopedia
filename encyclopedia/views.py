@@ -64,3 +64,20 @@ def new_page(request):
             return render(request, "encyclopedia/error.html", {
                 "message":"Entry page already exists"
             })
+
+def edit_page(request, title):
+    entryContent = util.get_entry(title)
+    return render(request, "encyclopedia/editpage.html",{
+        "title": title,
+        "content": entryContent
+    })
+
+def update_page(request, title):
+    if request.method == "POST":
+        entryContent = request.POST["content"]
+        util.save_entry(title, entryContent)
+        htmlContent = markdown_converter(title)
+        return render(request, "encyclopedia/entry.html",{
+            "title": title,
+            "content": htmlContent
+        })
