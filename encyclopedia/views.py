@@ -20,7 +20,7 @@ def entry(request, title):
     entryContent = markdown_converter(title)
     if entryContent == None:
         return render(request, "encyclopedia/error.html",{
-            "message": "This entry not exist"
+            "message": "This entry not exist."
         })
     else:
         return render(request, "encyclopedia/entry.html", {
@@ -43,9 +43,14 @@ def search(request):
             for entry in entiesList:
                 if searchText.lower() in entry.lower():
                     similarEntries.append(entry)
-            return render(request, "encyclopedia/search.html", {
-                "similarEntries": similarEntries
-            })
+            if not similarEntries:
+                return render(request, "encyclopedia/error.html", {
+                    "message": f"{searchText} page not found."
+                })
+            else:
+                return render(request, "encyclopedia/search.html", {
+                    "similarEntries": similarEntries
+                })
 
 def new_page(request):
     if request.method == "GET":
