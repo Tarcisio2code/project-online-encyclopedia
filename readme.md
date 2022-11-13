@@ -34,4 +34,4 @@ _According to HarvardX - Web Programming with Python and JavaScript Course_
 
 <br>
 
-![screenshot](img/preview.png?raw=true "screenshot")
+![preview](img/preview.gif)
