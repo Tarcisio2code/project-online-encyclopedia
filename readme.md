@@ -37,4 +37,4 @@ _According to HarvardX - Web Programming with Python and JavaScript Course_
 ![preview](img/preview.gif)
 
 <br>
-![Watch it on youtube](https://youtu.be/ZhFulqKNeh0)
+[Watch it on youtube](https://youtu.be/ZhFulqKNeh0)
